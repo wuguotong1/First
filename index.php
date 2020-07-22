@@ -1,3 +1,2 @@
 <?php
-phpinfo();
-
+include_once './Sample/index.php';
