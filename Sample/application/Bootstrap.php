@@ -28,4 +28,19 @@ class Bootstrap extends Yaf_Bootstrap_Abstract {
 	public function _initView(Yaf_Dispatcher $dispatcher) {
 		//在这里注册自己的view控制器，例如smarty,firekylin
 	}
+
+    public function _initDatabase() {
+        $arrConfig = Yaf_Registry::get('config');
+        $option = [
+            ‘database_type’ => 'mysql',
+            ‘database_name’ => $arrConfig->application->db->database,
+            ‘server’ => $arrConfig->application->db->hostname,
+            ‘username’ => $arrConfig->application->db->username,
+            ‘password’ => $arrConfig->application->db->password,
+            ‘prefix’ => $arrConfig->application->db->prefix,
+            ‘logging’ => $arrConfig->application->db->log,
+            ‘charset’ => ‘utf8’
+        ];
+        Yaf_Registry::set(‘db’, new \Medoo\Medoo($option));
+    }
 }
